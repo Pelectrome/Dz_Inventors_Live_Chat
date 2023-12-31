@@ -80,7 +80,7 @@
     <!-- Loop through chat history -->
     {% for msg in chat_history %}
         <div>
-            <b style="color: #000">{{ msg.user_name }}</b> {{ msg.message }}
+            <b style="color: #000">{{ msg.user_name|escape }}</b> {{ msg.message|escape }}
         </div>
     {% endfor %}
 </div>
