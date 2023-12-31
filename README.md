@@ -1,7 +1,6 @@
 <h1 align="center">DZ Inventors (Live Chat)
 <div align="center">
 <img src="https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flat&color=BC4E99" alt="Star Badge"/>
-<a href="https://discord.gg/XTW52Kt"><img src="https://img.shields.io/discord/733027681184251937.svg?style=flat&label=Join%20Community&color=7289DA" alt="Join Community Badge"/></a>
 <a href="https://www.facebook.com/DZ.Inventors" ><img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" /> </a>
 <br>
 <a href="https://github.com/Pelectrome/Dz_Inventors_Live_Chat/network/members"><img src="https://img.shields.io/github/forks/Pelectrome/Dz_Inventors_Live_Chat" alt="Forks Badge"/></a>
