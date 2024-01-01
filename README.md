@@ -3,7 +3,7 @@
 <img src="https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flat&color=BC4E99" alt="Star Badge"/>
 <a href="https://www.facebook.com/DZ.Inventors" ><img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" /> </a>
 <br>
-<a href="https://discord.gg/NWUxgZyX" ><iframe src="https://discord.com/widget?id=1191330963351945276&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe> </a>
+<a href="https://discord.gg/NWUxgZyX" ><img src="https://discord.com/widget?id=1191330963351945276&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"/> </a>
 <br>
 <a href="https://github.com/Pelectrome/Dz_Inventors_Live_Chat/network/members"><img src="https://img.shields.io/github/forks/Pelectrome/Dz_Inventors_Live_Chat" alt="Forks Badge"/></a>
 <a href="https://github.com/Pelectrome/Dz_Inventors_Live_Chat/pulls"><img src="https://img.shields.io/github/issues-pr/Pelectrome/Dz_Inventors_Live_Chat" alt="Pull Requests Badge"/></a>
