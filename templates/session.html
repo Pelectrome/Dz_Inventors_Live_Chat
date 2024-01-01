@@ -3,7 +3,7 @@
 <head>
     <title>DZ Inventors</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/x8S7zGf/Dz-Inventors-Logo.png" sizes="32x32">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
@@ -45,7 +45,8 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="script.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
 
 </body>
 </html>
