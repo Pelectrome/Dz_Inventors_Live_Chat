@@ -3,7 +3,9 @@ from flask import Flask, send_from_directory, redirect, url_for, request
 from flask_socketio import SocketIO, rooms
 import os
 
-app = Flask(__name__, static_folder='.', static_url_path='')
+
+
+app = Flask(__name__,static_url_path='/static', static_folder='static')
 
 app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
 socketio = SocketIO(app, cors_allowed_origins="*")
