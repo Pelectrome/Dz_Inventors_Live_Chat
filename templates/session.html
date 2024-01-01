@@ -3,74 +3,7 @@
 <head>
     <title>DZ Inventors</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/x8S7zGf/Dz-Inventors-Logo.png" sizes="32x32">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        h3 {
-            color: #333;
-            font-size: 30px;
-            margin-bottom: 5px;
-            margin-left: 20px; /* added margin */
-        }
-        h1 {
-            color: #333;
-            font-size: 15px;
-            margin-bottom: 20px;
-            margin-left: 20px; /* added margin */
-        }
-
-        .message_holder {
-            max-height: 350px;
-            overflow-y: auto;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 10px;
-            margin: 0 20px 10px 20px; /* added margin */
-        }
-
-        .message_holder div {
-            background-color: #ffffff;
-            padding: 8px;
-            margin-bottom: 5px;
-            border-radius: 5px;
-        }
-
-        form {
-            margin: 10px 20px; /* added margin */
-        }
-
-        input[type="text"] {
-            margin-right: 5px;
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        input[type="submit"] {
-            padding: 8px;
-            border-radius: 5px;
-            background-color: #4caf50;
-            color: #fff;
-            cursor: pointer;
-            border: none;
-        }
-
-
-        .container {
-            display: flex;
-            margin-top: 20px;
-            gap: 20px; /* Adjust the value as needed */         
-        }
-
-     
-
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -97,8 +30,6 @@
     <!-- Use a wrapping div for the checkbox to position it on a new line -->
     <div class="container">
         <div>
-            <label for="autoscroll">Auto Scroll</label>
-            <input type="checkbox" id="autoscroll" checked/>
         </div>
         <div id="online-clients"><p>Online Clients: 0</p></div>
         <div id="messages_count"><p>Messages: 0</p></div>
@@ -114,85 +45,7 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script type="text/javascript">
-    var notificationSound = document.getElementById('notificationSound');
-    var socket = io.connect('http://' + document.domain + ':' + location.port);
-
-    // Variable to store auto scroll status
-    var autoScrollEnabled = true;
-
-    // Function to scroll to the bottom of messages
-    function autoScrollToBottom() {
-        var messageHolder = $('div.message_holder');
-        messageHolder.scrollTop(messageHolder[0].scrollHeight);
-
-        // Scroll to the bottom of the page (optional)
-        $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
-    }
-
-    socket.on('connect', function () {
-        socket.emit('my event', {
-            data: 'User Connected'
-        });
-
-        // Trigger auto scroll when a new user connects
-        autoScrollToBottom();
-
-        var form = $('form').on('submit', function (e) {
-            e.preventDefault();
-            
-            // Get user input values
-            let user_name = $('input.username').val();
-            let user_input = $('input.message').val();
-
-            // Check if the message is not empty before emitting
-            if (user_input.trim() !== '') {
-                socket.emit('my event', {
-                    user_name: user_name,
-                    message: user_input
-                });
-
-                // Clear the message input field and set focus
-                $('input.message').val('').focus();
-            } else {
-                // Display an alert or take other actions for empty messages
-                alert('Please enter a non-empty message.');
-            }
-        });
-    });
-
-    socket.on('my response', function (msg) {
-        console.log(msg);
-        // Check if the received message is from a different user
-        if (msg.user_name != $('input.username').val() + ':') {
-            console.log('playing sound');
-            notificationSound.play();
-        }
-
-        if (typeof msg.user_name !== 'undefined') {
-            var messageHolder = $('div.message_holder');
-            messageHolder.append('<div><b style="color: #000">' + msg.user_name + '</b> ' + msg.message + '</div>');
-
-            // Scroll only if auto scroll is enabled
-            if (autoScrollEnabled) {
-                autoScrollToBottom();
-            }
-        }
-    });
-
-    socket.on('online_clients_count', function (data) {
-        $('#online-clients').text('Online Clients: ' + data.count);
-    });
-
-    socket.on('messages_count', function (data) {
-        $('#messages_count').text('Messages : ' + data.count);
-    });
-
-    // Handle the change event of the auto scroll checkbox
-    $('#autoscroll').change(function () {
-        autoScrollEnabled = this.checked;
-    });
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
