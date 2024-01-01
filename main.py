@@ -3,6 +3,8 @@ from flask import Flask, send_from_directory, redirect, url_for, request
 from flask_socketio import SocketIO, rooms
 import os
 from flask_caching import Cache
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 import time
 
 
@@ -13,6 +15,13 @@ app.config['CACHE_TYPE'] = 'simple'  # You can use other cache types
 cache = Cache(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
+
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    storage_uri="memory://",
+
+)
 # Keep track of online clients
 online_clients = 0
 
@@ -117,6 +126,10 @@ def handle_disconnect():
     send_online_clients_count()
 
 
+# Rate limit configuration
+rate_limit_msg = "You are sending messages too frequently. Please wait a moment before sending another message."
+
+
 @socketio.on('my event')
 def handle_my_custom_event(json):
     global chat_history
@@ -126,16 +139,26 @@ def handle_my_custom_event(json):
     client_ip = request.environ.get('REMOTE_ADDR')
     print('Client IP:', client_ip)
 
-    if 'data' in json and json['data'] == 'User Connected':
-        print('User Connected event detected')
-    else:
-        if json.get('message', '').strip():
-            json['user_name'] = json.get('user_name', '') + ':'
-            chat_history.append(json)
-            send_messages_count()
+    try:
+        # Attempt to acquire the rate-limited function
+        with limiter.limit("10 per minute", error_message=rate_limit_msg):
+            # Continue processing the event
+            if 'data' in json and json['data'] == 'User Connected':
+                print('User Connected event detected')
+            else:
+                if json.get('message', '').strip():
+                    json['user_name'] = json.get('user_name', '') + ':'
+                    chat_history.append(json)
+                    socketio.emit('my response', json, namespace='/')
 
-    send_online_clients_count()
-    socketio.emit('my response', json, namespace='/')
+        send_online_clients_count()
+
+    except Exception as e:
+        # Handle the rate limit error
+        print(f"Rate limit exceeded: {e}")
+        # Notify the client about the rate limit exceeded
+        socketio.emit('rate_limit_error', {
+                      'message': rate_limit_msg}, namespace='/', room=request.sid)
 
 
 if __name__ == '__main__':

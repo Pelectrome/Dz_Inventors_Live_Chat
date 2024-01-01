@@ -71,6 +71,10 @@ const ChatComponent = () => {
 
         };
 
+        const handleRateLimitError = (data) => {
+            alert(data.message);
+        }
+
         const handleChatHistory = (data) => {
             // Update chat history when receiving 'chat_history' event
             setChatHistory(data.history);
@@ -86,6 +90,7 @@ const ChatComponent = () => {
         socket.on('messages_count', handleMessagesCount);
         // Subscribe to 'chat_history' event
         socket.on('chat_history', handleChatHistory);
+        socket.on('rate_limit_error', handleRateLimitError);
 
         return () => {
             socket.off('connect', handleConnect);
@@ -93,6 +98,7 @@ const ChatComponent = () => {
             socket.off('online_clients_count', handleOnlineClientsCount);
             socket.off('messages_count', handleMessagesCount);
             socket.off('chat_history', handleChatHistory);
+            socket.off('rate_limit_error', handleRateLimitError);
         };
     }, [socket, userName, autoScrollEnabled]);
 
