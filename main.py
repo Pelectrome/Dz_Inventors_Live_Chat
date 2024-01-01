@@ -6,6 +6,7 @@ from flask_caching import Cache
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 import time
+import hashlib
 
 
 app = Flask(__name__)
@@ -147,7 +148,10 @@ def handle_my_custom_event(json):
                 print('User Connected event detected')
             else:
                 if json.get('message', '').strip():
-                    json['user_name'] = json.get('user_name', '') + ':'
+                    # Generate a user identifier based on IP
+                    user_id = user_id_from_ip(client_ip)
+                    json['user_name'] = json.get(
+                        'user_name', '') + f'#{user_id}'
                     chat_history.append(json)
                     socketio.emit('my response', json, namespace='/')
 
@@ -159,6 +163,14 @@ def handle_my_custom_event(json):
         # Notify the client about the rate limit exceeded
         socketio.emit('rate_limit_error', {
                       'message': rate_limit_msg}, namespace='/', room=request.sid)
+
+
+def user_id_from_ip(ip):
+    # Use a cryptographic hash function (SHA-256 in this example)
+    hash_object = hashlib.sha256(ip.encode()).hexdigest()[:5]
+    # Convert the hash to a hexadecimal string and take the first 5 characters
+    user_id_str = int(hash_object, 16)
+    return user_id_str
 
 
 if __name__ == '__main__':
