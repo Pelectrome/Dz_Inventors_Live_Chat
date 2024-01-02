@@ -1,0 +1,90 @@
+/* ChatComponent.css */
+
+.chat-container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar-btn {
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #f1f1f1;
+    border: none;
+    margin: 10px;
+    height: fit-content;
+    /* Set a fixed height */
+}
+
+.sidebar {
+  width: 0;
+  height: 100%;
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  transition: width 0.5s;
+  visibility: hidden; /* initially hidden */
+
+}
+
+.sidebar.open {
+  width: 250px;
+  visibility: visible; /* show when open */
+  opacity: 1; /* fully opaque when open */
+}
+
+.sidebar-header {
+    text-align: center;
+    padding: 10px;
+}
+
+.sidebar-list {
+    padding: 0;
+    list-style-type: none;
+}
+
+.sidebar-list li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.chat-content {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+    margin: 10px;
+}
+
+/* Media query for mobile responsiveness */
+@media only screen and (max-width: 768px) {
+    .chat-container {
+        flex-direction: row;
+        /* Switch to column layout on mobile */
+    }
+
+    .sidebar {
+        width: 0;
+        position: absolute;
+        transition: width 0.5s;
+    }
+
+    .sidebar.open
+    {
+        position: absolute;
+    }
+
+    .sidebar-btn {
+        /* Move the button to the top on mobile */
+        align-self: flex-start;
+        /* Align the button to the start of the container */
+        margin-bottom: 10px;
+        position: absolute;
+        right: -1px;
+        z-index: 2;
+    }
+
+    .chat-content {
+        margin-top: 10px;
+        width: 100%;
+    }
+}
