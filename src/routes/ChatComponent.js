@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
 
@@ -10,8 +10,9 @@ const ChatComponent = () => {
     const [userName, setUserName] = useState('');
     const [userInput, setUserInput] = useState('');
     const [chatHistory, setChatHistory] = useState([]);
+    const notificationSoundRef = useRef(null);
     useEffect(() => {
-        const newSocket = io.connect('http://127.0.0.1:8080');
+        const newSocket = io.connect('http://52.151.248.228:8080/');
 
         // Log connection status
         console.log('Attempting to connect to server');
@@ -48,7 +49,7 @@ const ChatComponent = () => {
         const handleMyResponse = (msg) => {
             if (msg.user_name !== userName + ':') {
                 console.log('playing sound');
-                // You can play the notification sound here
+                notificationSoundRef.current.play();
             }
 
             if (typeof msg.user_name !== 'undefined') {
@@ -70,6 +71,10 @@ const ChatComponent = () => {
 
         };
 
+        const handleRateLimitError = (data) => {
+            alert(data.message);
+        }
+
         const handleChatHistory = (data) => {
             // Update chat history when receiving 'chat_history' event
             setChatHistory(data.history);
@@ -85,6 +90,7 @@ const ChatComponent = () => {
         socket.on('messages_count', handleMessagesCount);
         // Subscribe to 'chat_history' event
         socket.on('chat_history', handleChatHistory);
+        socket.on('rate_limit_error', handleRateLimitError);
 
         return () => {
             socket.off('connect', handleConnect);
@@ -92,6 +98,7 @@ const ChatComponent = () => {
             socket.off('online_clients_count', handleOnlineClientsCount);
             socket.off('messages_count', handleMessagesCount);
             socket.off('chat_history', handleChatHistory);
+            socket.off('rate_limit_error', handleRateLimitError);
         };
     }, [socket, userName, autoScrollEnabled]);
 
@@ -162,6 +169,7 @@ const ChatComponent = () => {
                     </div>
                 </div>
             </form>
+            <audio ref={notificationSoundRef} src="http://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3" preload="auto"></audio>
         </div>
     );
 };
