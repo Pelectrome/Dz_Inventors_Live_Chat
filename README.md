@@ -14,11 +14,30 @@
 <a href="https://github.com/Pelectrome/Dz_Inventors_Live_Chat/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/Pelectrome/Dz_Inventors_Live_Chat?color=2b9348"></a>
 <a href="https://github.com/Pelectrome/Dz_Inventors_Live_Chat/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Pelectrome/Dz_Inventors_Live_Chat?color=2b9348" alt="License Badge"/></a>
 
-  
 ![image](https://github.com/GMAGD/Dz_Inventors_Live_Chat/assets/21009210/c2c25d24-cbdb-4270-9d48-3017f9e7050d)
 
 </div>
 
+## Build Setup
+
+```bash
+# install dependencies
+$ npm install
+$ pip install -r requirements.txt
+
+# serve with hot reload at localhost:5000
+$ npm run dev
+
+# run python socket server at localhost:8080
+$ python main.py
+
+# build for production and launch server
+$ npm run build
+$ npm run start
+
+$ python main.py
+
+```
 
 ## Contribute
 
@@ -26,6 +45,7 @@ Contributions are always welcome!
 Please read the [contribution guidelines](contributing.md) first.
 
 ## Special Thanks 🙇
+
 - [DZInventors](https://www.facebook.com/DZ.Inventors) for making this repo!
 
 ## License

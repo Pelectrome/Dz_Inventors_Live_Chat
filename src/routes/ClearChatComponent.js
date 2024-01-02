@@ -5,11 +5,13 @@ const ClearChatComponent = () => {
     const [password, setPassword] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    // Get the domain dynamically from the current page's location
+    const domain = window.location.hostname;
 
     const handleClearChat = (e) => {
         e.preventDefault();
 
-        const socket = io.connect('http://52.151.248.228:8080/');
+        const socket = io.connect(`http://${domain}:8080/`);
 
         // Emit an event to the server with the entered password
         socket.emit('clear_chat', { password });
