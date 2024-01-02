@@ -2,8 +2,11 @@
 <div align="center">
 <img src="https://img.shields.io/static/v1?label=%F0%9F%8C%9F&message=If%20Useful&style=style=flat&color=BC4E99" alt="Star Badge"/>
 <a href="https://www.facebook.com/DZ.Inventors" ><img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" /> </a>
+<a href="https://discord.gg/jFcfE4DjV3" ><img src="https://img.shields.io/badge/Discord-Server?style=flat&logo=discord&color=white
+"/> </a>
 <br>
 <a href="https://discord.gg/jFcfE4DjV3" ><img src="https://img.shields.io/discord/1191330963351945276"/> </a>
+
 <br>
 <a href="https://github.com/Pelectrome/Dz_Inventors_Live_Chat/network/members"><img src="https://img.shields.io/github/forks/Pelectrome/Dz_Inventors_Live_Chat" alt="Forks Badge"/></a>
 <a href="https://github.com/Pelectrome/Dz_Inventors_Live_Chat/pulls"><img src="https://img.shields.io/github/issues-pr/Pelectrome/Dz_Inventors_Live_Chat" alt="Pull Requests Badge"/></a>
